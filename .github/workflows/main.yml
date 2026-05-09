@@ -6,12 +6,17 @@ on:
     - cron: '0 0 * * 0'
   workflow_dispatch:
 
+# FIX 1: Give the robot permission to actually save the file to the repo
+permissions:
+  contents: write
+
 jobs:
   update-database:
     runs-on: ubuntu-latest
     steps:
+      # FIX 2: Bumped to v4 to remove the Node.js warning
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Download GeoLite2 ASN Database
         run: |
